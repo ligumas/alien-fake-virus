@@ -4,15 +4,6 @@ title 𖤐⟁⟟🛸 ALIEN SHOW 4.0 𖤐⟁⟟🛸
 color 0A
 
 :: =============================
-:: REAL MOUSE ACCELERATION ON
-:: =============================
-reg add "HKCU\Control Panel\Mouse" /v MouseSpeed /t REG_SZ /d 1 /f
-reg add "HKCU\Control Panel\Mouse" /v MouseThreshold1 /t REG_SZ /d 6 /f
-reg add "HKCU\Control Panel\Mouse" /v MouseThreshold2 /t REG_SZ /d 10 /f
-RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters
-echo 👽 Real mouse acceleration activated.
-
-:: =============================
 :: WALLPAPER SETUP
 :: =============================
 set alienWallpaper=%~dp0allu.png
@@ -29,6 +20,14 @@ if exist "%putinScreen%" (
     start "" "%putinScreen%"
     echo ⟊⟟⧖ Putin screen activated
 )
+
+:: =============================
+:: SHOW SYSTEM INFO IN WINDOWS
+:: =============================
+echo 👽 Displaying system info windows...
+powershell -command "Add-Type -AssemblyName PresentationFramework; $w=New-Object Windows.Window; $t=New-Object Windows.Controls.TextBox; $t.Text = (systeminfo); $t.Width=800; $t.Height=400; $t.FontSize=14; $t.IsReadOnly=$true; $t.TextWrapping='Wrap'; $w.Content=$t; $w.Title='👽 SYSTEM INFO'; $w.Topmost=$true; $w.ShowDialog() | Out-Null"
+powershell -command "Add-Type -AssemblyName PresentationFramework; $w=New-Object Windows.Window; $t=New-Object Windows.Controls.TextBox; $t.Text = (net user); $t.Width=600; $t.Height=300; $t.FontSize=14; $t.IsReadOnly=$true; $t.TextWrapping='Wrap'; $w.Content=$t; $w.Title='👽 USERS'; $w.Topmost=$true; $w.ShowDialog() | Out-Null"
+powershell -command "Add-Type -AssemblyName PresentationFramework; $w=New-Object Windows.Window; $t=New-Object Windows.Controls.TextBox; $t.Text = (tasklist); $t.Width=800; $t.Height=400; $t.FontSize=14; $t.IsReadOnly=$true; $t.TextWrapping='Wrap'; $w.Content=$t; $w.Title='👽 PROCESSES'; $w.Topmost=$true; $w.ShowDialog() | Out-Null"
 
 :: =============================
 :: INITIAL ALIEN BEEP
