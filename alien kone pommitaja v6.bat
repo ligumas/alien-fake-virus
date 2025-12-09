@@ -1,124 +1,146 @@
 @echo off
-title ⟊⟁𖤐 ALIEN PROTOCOL █████
 setlocal enabledelayedexpansion
+title 𖤐⟁⟟🛸 ALIEN SHOW 4.0 𖤐⟁⟟🛸
 color 0A
 
-:: =======================================
-:: JÄRJESTELMÄNVALVOJAN TARKISTUS (alien-muoto)
-:: =======================================
-net session >nul 2>&1
-if %errorlevel% neq 0 (
-    echo ⟊⟁𖤐⟁⟟⧖⧃ 𖤣⟊⟁ ⟟⟊𐍈 ⧖⟁ ✦✦✦ ADMIN ✦✦✦ ⧃⧠𖤣
-    pause
-    exit /b
+:: =============================
+:: REAL MOUSE ACCELERATION ON
+:: =============================
+reg add "HKCU\Control Panel\Mouse" /v MouseSpeed /t REG_SZ /d 1 /f
+reg add "HKCU\Control Panel\Mouse" /v MouseThreshold1 /t REG_SZ /d 6 /f
+reg add "HKCU\Control Panel\Mouse" /v MouseThreshold2 /t REG_SZ /d 10 /f
+RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters
+echo 👽 Real mouse acceleration activated.
+
+:: =============================
+:: WALLPAPER SETUP
+:: =============================
+set alienWallpaper=%~dp0allu.png
+set putinScreen=%~dp0ezs.png
+
+:: Change desktop wallpaper to alien wallpaper
+if exist "%alienWallpaper%" (
+    powershell -command "Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class Wallpaper { [DllImport(""user32.dll"", SetLastError=true)] public static extern bool SystemParametersInfo(int uAction,int uParam,string lpvParam,int fuWinIni); }'; [Wallpaper]::SystemParametersInfo(20,0,'%alienWallpaper%',3)"
+    echo ⟊⟟⧖ Alien wallpaper activated
 )
 
-:: =======================================
-:: ASETUKSET
-:: =======================================
-set pads=20
-set lines=50
-set wallpaper=%~dp0alien.jpg
-set beeps=70
-set popups=10
-
-:: Alien-viestit popupteihin
-set messages[0]=👽 Tervetuloa maapallolle!
-set messages[1]=🛸 Olet havaittu!
-set messages[2]=✨ Alieneilla on silmät päällä!
-set messages[3]=⟁⊹ Ole varuillasi!
-set messages[4]=🜁🜎 Suunnitelma käynnissä!
-set messages[5]=🛸👁️ Pian tapahtuu jotain!
-set messages[6]=👽 Abduktio käynnissä!
-set messages[7]=✨🔮 Katso taivaalle!
-set messages[8]=⟁ Alien-hälytys aktivoitu!
-set messages[9]=👾 Tervetuloa galaksiin!
-
-:: =======================================
-:: TAUSTAKUVA
-:: =======================================
-if exist "%wallpaper%" (
-    powershell -command "Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class Wallpaper { [DllImport(""user32.dll"", SetLastError=true)] public static extern bool SystemParametersInfo(int uAction,int uParam,string lpvParam,int fuWinIni); }'; [Wallpaper]::SystemParametersInfo(20,0,'%wallpaper%',3)"
-) else (
-    echo ⟟⟊𐍈 ⧖⟁ ⟊𖤐✦ PROJEKTIO ✦✦✦
+:: Open Putin screen image in default viewer
+if exist "%putinScreen%" (
+    start "" "%putinScreen%"
+    echo ⟊⟟⧖ Putin screen activated
 )
 
-:: =======================================
-:: LUODAAN ENEMMÄN ALIEN NOTEPAD-TIEDOSTOJA
-:: =======================================
-for /l %%p in (1,1,%pads%) do (
-    set "outfile=alien_%%p.txt"
-    > "!outfile!" (
-        for /l %%i in (1,1,%lines%) do (
-            set /a rand=!random! %% 7
-            if !rand!==0 echo 👽𖤐✨🛸⟁⟟⟊
-            if !rand!==1 echo ⟟⟊𐍈𖣘▜⧖
-            if !rand!==2 echo ⧃⧠𖤣🜁🜎✨
-            if !rand!==3 echo ⟁𖤐⡡⟟𖣘⊹
-            if !rand!==4 echo ⟊🜄𖠑𖤓⧖𖠿🛸
-            if !rand!==5 echo 👾✨🛸⟁🜁
-            if !rand!==6 echo ⛧👽🔮⟟⧖
-        )
-    )
-    start "" notepad.exe "!outfile!"
+:: =============================
+:: INITIAL ALIEN BEEP
+:: =============================
+powershell -c "[console]::beep(900,300)"
+powershell -c "[console]::beep(1200,200)"
+powershell -c "[console]::beep(600,200)"
+
+:: =============================
+:: ALIEN ASCII LOGO
+:: =============================
+cls
+echo.
+echo      𖤐 ⟁ ⧖ ⟊ 🛸 𖤐
+echo      ⟟⟊⧖⟁ 𖤐⟟⟊🛸⧠𖤐⟊
+echo      𖤐 🛸 ⟁ ⧖ 𖤐
+echo.
+timeout /t 1 >nul
+
+:: =============================
+:: SYSTEM SCAN EFFECT
+:: =============================
+echo ⟁⧖⟟⟊𖤐⟊⟊𖤐⟁⧠𖤐...
+powershell -command "Start-Sleep -Milliseconds 700"
+for /l %%i in (1,1,20) do (
+    set /a r=!random! %% 4
+    if !r!==0 echo ⟟⟊𖤐⧃⟁⟊𖤓⧖𖤐...
+    if !r!==1 echo 🛸𖣘⟁⧖⟟𖤐⡡⧃...
+    if !r!==2 echo ✨𖤐⡡⟁⧠⟟⧃⧖...
+    if !r!==3 echo 👽⧠𖤓⟟𖤐⟊⧠...
+    powershell -command "Start-Sleep -Milliseconds 200"
 )
+timeout /t 1 >nul
 
-:: =======================================
-:: PÄÄ LOOP — KESTÄÄ IKUISESTI
-:: =======================================
-:ALIENLOOP
-
-    :: Satunnaiset CMD-värit
-    set /a colorRand=!random! %% 6
-    if !colorRand!==0 color 0A
-    if !colorRand!==1 color 0B
-    if !colorRand!==2 color 0C
-    if !colorRand!==3 color 0D
-    if !colorRand!==4 color 0E
-    if !colorRand!==5 color 0F
-
-    :: Putoava alien-data
-    for /l %%i in (1,1,25) do (
-        set "line="
-        for /l %%j in (1,1,12) do (
-            set /a r=!random! %% 7
-            if !r!==0 set "char=👽"
-            if !r!==1 set "char=🛸"
-            if !r!==2 set "char=✨"
-            if !r!==3 set "char=⟁"
-            if !r!==4 set "char=⟊"
-            if !r!==5 set "char=👾"
-            if !r!==6 set "char=🔮"
-            set "line=!line!!char!"
-        )
-        echo !line!
-        powershell -command "Start-Sleep -Milliseconds 70"
+:: =============================
+:: OPEN ALIEN NOTEPADS
+:: =============================
+for /l %%p in (1,1,6) do (
+    set "file=alien_%%p.txt"
+    break>"!file!"
+    for /l %%i in (1,1,50) do (
+        set /a r=!random! %% 5
+        if !r!==0 echo 👽𖤐✨🛸⟁⟟⟊>>"!file!"
+        if !r!==1 echo ⟟⟊𐍈𖣘▜⧖>>"!file!"
+        if !r!==2 echo ⧃⧠𖤣🜁🜎✨>>"!file!"
+        if !r!==3 echo ⟁𖤐⡡⟟𖣘⊹>>"!file!"
+        if !r!==4 echo ⟊🜄𖠑𖤓⧖𖠿🛸>>"!file!"
     )
+    start "" notepad "!file!"
+)
+timeout /t 1 >nul
 
-    :: Alien beep-äänet
-    for /l %%b in (1,1,7) do (
-        powershell -c "[console]::beep((400 + (Get-Random -Maximum 1200)),(100 + (Get-Random -Maximum 200)))"
-    )
+:: =============================
+:: POPUP MESSAGES
+:: =============================
+set msg[0]=👽 Terve, maapallon olento.
+set msg[1]=🛸 Skannaus käynnissä...
+set msg[2]=✨ Havaitsimme sinut.
+set msg[3]=⟁ Ulkoavaruus tarkkailee.
+set msg[4]=𖤐 Signaali vastaanotettu.
 
-    :: Satunnaiset popup-viestit
-    set /a popupRand=!random! %% %popups%
+for /l %%i in (1,1,5) do (
+    set /a n=!random! %% 5
     powershell -command ^
-    "[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null; ^
-    $Template = [Windows.UI.Notifications.ToastTemplateType]::ToastText02; ^
-    $Xml = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent($Template); ^
-    $TextNodes = $Xml.GetElementsByTagName('text'); ^
-    $TextNodes.Item(0).AppendChild($Xml.CreateTextNode('👽 Alien')) > $null; ^
-    $TextNodes.Item(1).AppendChild($Xml.CreateTextNode('%messages[%popupRand%]%')) > $null; ^
-    $Toast = [Windows.UI.Notifications.ToastNotification]::new($Xml); ^
-    $Notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('Alien Script'); ^
-    $Notifier.Show($Toast)"
+    "$t=[Windows.UI.Notifications.ToastNotificationManager];$x=$t::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02);$n=$x.GetElementsByTagName('text');$n.Item(0).AppendChild($x.CreateTextNode('👽 ALIEN MESSAGE'));$n.Item(1).AppendChild($x.CreateTextNode('!msg[%n%]!'));$toast=[Windows.UI.Notifications.ToastNotification]::new($x);$not=$t::CreateToastNotifier('Alien');$not.Show($toast)"
+    powershell -c "[console]::beep((500 + (Get-Random -Maximum 1200)),200)"
+    timeout /t 1 >nul
+)
 
-    :: Satunnaiset alien-hälytysviestit CMD-ikkunaan
-    set /a alertRand=!random! %% 5
-    if !alertRand!==0 echo [Alien ALERT] Energia-anomalia havaittu!
-    if !alertRand!==1 echo [Alien ALERT] Analysoidaan maapallon signaaleja...
-    if !alertRand!==2 echo [Alien ALERT] Uusi olio havaittu!
-    if !alertRand!==3 echo [Alien ALERT] 🛸👽✨
-    if !alertRand!==4 echo [Alien ALERT] 🔮✨ Alien-aktivaatio!
+:: =============================
+:: MATRIX-STYLE DROPS
+:: =============================
+cls
+for /l %%i in (1,1,80) do (
+    set "line="
+    for /l %%j in (1,1,30) do (
+        set /a r=!random! %% 5
+        if !r!==0 set "ch=𖤐"
+        if !r!==1 set "ch=⟊"
+        if !r!==2 set "ch=✨"
+        if !r!==3 set "ch=🛸"
+        if !r!==4 set "ch=⟁"
+        set "line=!line!!ch!"
+    )
+    echo !line!
+    powershell -command "Start-Sleep -Milliseconds 70"
+)
 
-goto ALIENLOOP
+:: =============================
+:: ALIEN FLASH COLORS & BEEPS
+:: =============================
+for /l %%c in (1,1,10) do (
+    color 0A
+    powershell -c "[console]::beep(1200,70)"
+    powershell -command "Start-Sleep -Milliseconds 100"
+    color 0C
+    powershell -c "[console]::beep(900,70)"
+    powershell -command "Start-Sleep -Milliseconds 100"
+    color 0E
+    powershell -c "[console]::beep(700,70)"
+    powershell -command "Start-Sleep -Milliseconds 100"
+)
+
+:: =============================
+:: END SHOW
+:: =============================
+cls
+echo.
+echo       𖤐⟊⟁✨🛸 𖤐⟊⟁✨🛸
+echo       ⟁⧖⟟⟊𖤐⟊ SHOW COMPLETE ⟁⧖⟟⟊𖤐⟊
+echo       𖤐⟊⟁✨🛸 𖤐⟊⟁✨🛸
+echo.
+powershell -c "[console]::beep(600,200)"
+pause
+exit
