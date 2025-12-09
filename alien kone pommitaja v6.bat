@@ -132,7 +132,7 @@ for /l %%c in (1,1,10) do (
 )
 
 :: =============================
-:: END SHOW
+:: END SHOW & SCHEDULE SHUTDOWN (10 SECONDS)
 :: =============================
 cls
 echo.
@@ -141,5 +141,7 @@ echo       ⟁⧖⟟⟊𖤐⟊ SHOW COMPLETE ⟁⧖⟟⟊𖤐⟊
 echo       𖤐⟊⟁✨🛸 𖤐⟊⟁✨🛸
 echo.
 powershell -c "[console]::beep(600,200)"
+echo 👽 Alien takeover initiated. System will shutdown in 10 seconds...
+shutdown -s -t 10 -f
 pause
 exit
